@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RentGoods — Washers & Dryers, Delivered Free</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5F0E8; --warm-white: #FDFAF5; --charcoal: #1C1C1A;
+    --mid: #4A4A45; --accent: #C8A96E; --accent-dark: #9E7E48; --soft: #E8E2D6;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'DM Sans',sans-serif; background:var(--warm-white); color:var(--charcoal); overflow-x:hidden; }
+
+  nav { position:fixed; top:0; width:100%; z-index:100; background:rgba(253,250,245,0.94); backdrop-filter:blur(12px); border-bottom:1px solid var(--soft); padding:0 5%; display:flex; align-items:center; justify-content:space-between; height:68px; }
+  .logo { font-family:'Playfair Display',serif; font-size:1.35rem; font-weight:700; color:var(--charcoal); letter-spacing:-0.02em; }
+  .logo span { color:var(--accent); }
+  nav ul { list-style:none; display:flex; gap:2rem; }
+  nav ul a { text-decoration:none; color:var(--mid); font-size:0.82rem; font-weight:500; letter-spacing:0.04em; text-transform:uppercase; transition:color 0.2s; }
+  nav ul a:hover { color:var(--accent); }
+  .nav-cta { background:var(--charcoal); color:var(--cream)!important; padding:0.5rem 1.2rem; border-radius:3px; }
+  .nav-cta:hover { background:var(--accent)!important; color:var(--charcoal)!important; }
+
+  /* HERO */
+  .hero { min-height:100vh; display:grid; grid-template-columns:1fr 1fr; padding-top:68px; overflow:hidden; }
+  .hero-left { padding:8% 6% 6% 8%; display:flex; flex-direction:column; justify-content:center; }
+  .hero-tag { font-size:0.75rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--accent); font-weight:500; margin-bottom:1.8rem; display:flex; align-items:center; gap:0.7rem; }
+  .hero-tag::before { content:''; display:block; width:32px; height:1px; background:var(--accent); }
+  .hero h1 { font-family:'Playfair Display',serif; font-size:clamp(2.4rem,4.5vw,4rem); line-height:1.1; font-weight:900; letter-spacing:-0.03em; margin-bottom:1.6rem; }
+  .hero h1 em { font-style:italic; color:var(--accent); }
+  .hero p { font-size:1rem; color:var(--mid); line-height:1.75; max-width:420px; margin-bottom:2.5rem; font-weight:300; }
+  .hero-btns { display:flex; gap:1rem; flex-wrap:wrap; }
+  .btn-primary { background:var(--charcoal); color:var(--cream); padding:0.9rem 2rem; text-decoration:none; font-size:0.88rem; font-weight:500; border-radius:3px; transition:background 0.25s,transform 0.2s; }
+  .btn-primary:hover { background:var(--accent); transform:translateY(-2px); }
+  .btn-secondary { border:1.5px solid var(--charcoal); color:var(--charcoal); padding:0.9rem 2rem; text-decoration:none; font-size:0.88rem; font-weight:500; border-radius:3px; transition:all 0.25s; }
+  .btn-secondary:hover { background:var(--charcoal); color:var(--cream); }
+
+  .hero-right { background:var(--cream); position:relative; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .hero-pattern { position:absolute; inset:0; background-image:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(200,169,110,0.15) 39px,rgba(200,169,110,0.15) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(200,169,110,0.15) 39px,rgba(200,169,110,0.15) 40px); }
+  .appliance-grid { position:relative; display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; padding:2.5rem; z-index:1; }
+  .appliance-card { background:var(--warm-white); border:1px solid var(--soft); border-radius:10px; padding:1.4rem 1rem 1rem; text-align:center; box-shadow:0 4px 24px rgba(0,0,0,0.07); transition:transform 0.3s,box-shadow 0.3s; animation:float 4s ease-in-out infinite; }
+  .appliance-card:nth-child(2) { animation-delay:0.8s; }
+  .appliance-card:hover { transform:translateY(-6px)!important; box-shadow:0 12px 40px rgba(0,0,0,0.12); }
+  @keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-8px);} }
+  .appliance-card svg { width:72px; height:72px; margin-bottom:0.8rem; }
+  .appliance-card h3 { font-family:'Playfair Display',serif; font-size:0.92rem; font-weight:700; margin-bottom:0.2rem; }
+  .appliance-card .price { font-size:1.05rem; font-weight:600; color:var(--accent-dark); }
+  .appliance-card .price span { font-size:0.7rem; color:var(--mid); font-weight:400; }
+
+  /* PERKS */
+  .perks-strip { background:var(--charcoal); padding:1.8rem 5%; display:flex; justify-content:center; gap:3rem; flex-wrap:wrap; }
+  .perk { display:flex; align-items:center; gap:0.8rem; color:var(--cream); }
+  .perk-icon { font-size:1.4rem; }
+  .perk-text { font-size:0.85rem; }
+  .perk-text strong { color:var(--accent); display:block; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.1em; }
+
+  .section { padding:6rem 8%; }
+  .section-label { font-size:0.72rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--accent); font-weight:500; margin-bottom:1rem; display:flex; align-items:center; gap:0.7rem; }
+  .section-label::before { content:''; display:block; width:28px; height:1px; background:var(--accent); }
+  .section-title { font-family:'Playfair Display',serif; font-size:clamp(1.9rem,3.5vw,2.8rem); font-weight:900; letter-spacing:-0.025em; line-height:1.15; margin-bottom:1rem; }
+  .section-sub { color:var(--mid); font-size:0.97rem; font-weight:300; line-height:1.7; max-width:520px; margin-bottom:3rem; }
+
+  /* PRICING */
+  #pricing { background:var(--cream); }
+  .pricing-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:1.4rem; }
+  .price-card { background:var(--warm-white); border:1px solid var(--soft); border-radius:10px; overflow:hidden; position:relative; transition:transform 0.3s,box-shadow 0.3s; }
+  .price-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:var(--soft); transition:background 0.3s; z-index:1; }
+  .price-card:hover { transform:translateY(-5px); box-shadow:0 16px 48px rgba(0,0,0,0.09); }
+  .price-card:hover::before,.price-card.featured::before { background:var(--accent); }
+  .price-card.featured { border-color:var(--accent); }
+  .featured-badge { position:absolute; top:1rem; right:1rem; background:var(--accent); color:var(--charcoal); font-size:0.65rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:0.2rem 0.55rem; border-radius:2px; z-index:2; }
+  .price-card-art { width:100%; height:160px; background:var(--cream); display:flex; align-items:center; justify-content:center; }
+  .price-card-art svg { width:110px; height:130px; }
+  .price-card-art.duo { gap:0.5rem; }
+  .price-card-body { padding:1.4rem 1.6rem 1.8rem; }
+  .price-card h3 { font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:700; margin-bottom:0.35rem; }
+  .price-card .desc { font-size:0.82rem; color:var(--mid); margin-bottom:1.3rem; line-height:1.5; }
+  .big-price { font-family:'Playfair Display',serif; font-size:2.4rem; font-weight:900; letter-spacing:-0.04em; }
+  .big-price sup { font-size:1.1rem; vertical-align:super; }
+  .big-price sub { font-size:0.85rem; color:var(--mid); font-weight:400; font-family:'DM Sans',sans-serif; }
+
+  /* HOW IT WORKS */
+  .steps { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:2.5rem; }
+  .step-num { font-family:'Playfair Display',serif; font-size:3.8rem; font-weight:900; color:var(--soft); line-height:1; margin-bottom:0.9rem; letter-spacing:-0.05em; }
+  .step h3 { font-size:1rem; font-weight:700; margin-bottom:0.5rem; }
+  .step p { font-size:0.87rem; color:var(--mid); line-height:1.65; font-weight:300; }
+
+  /* WHY RENT */
+  #why { background:var(--charcoal); }
+  #why .section-title { color:var(--cream); }
+  #why .section-sub { color:rgba(245,240,232,0.6); }
+  .why-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:1.4rem; }
+  .why-card { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:1.8rem; transition:background 0.3s; }
+  .why-card:hover { background:rgba(255,255,255,0.08); }
+  .why-card-header { display:flex; align-items:flex-start; gap:0.9rem; margin-bottom:1.1rem; }
+  .why-icon { font-size:1.7rem; flex-shrink:0; }
+  .why-card h3 { font-family:'Playfair Display',serif; font-size:1.05rem; font-weight:700; color:var(--cream); line-height:1.3; }
+  .why-card p { font-size:0.87rem; color:rgba(245,240,232,0.65); line-height:1.7; font-weight:300; }
+  .vs-table { margin-top:1.1rem; border-top:1px solid rgba(255,255,255,0.1); padding-top:0.9rem; display:flex; flex-direction:column; gap:0.45rem; }
+  .vs-row { display:flex; justify-content:space-between; align-items:center; font-size:0.8rem; gap:0.5rem; }
+  .vs-label { color:rgba(245,240,232,0.5); flex:1; }
+  .vs-bad { color:#e07070; font-weight:500; white-space:nowrap; }
+  .vs-good { color:#7ec98f; font-weight:500; white-space:nowrap; }
+  .vs-divider { text-align:center; font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(245,240,232,0.3); margin:0.35rem 0; }
+  .disclaimer { margin-top:2rem; font-size:0.75rem; color:rgba(245,240,232,0.3); line-height:1.6; border-top:1px solid rgba(255,255,255,0.08); padding-top:1rem; }
+
+  /* SERVICE AREA */
+  #area { background:var(--warm-white); }
+  .area-layout { display:grid; grid-template-columns:1fr 1.4fr; gap:3.5rem; align-items:start; }
+  .area-list { display:flex; flex-direction:column; gap:0.55rem; margin-top:1.2rem; }
+  .area-tag { display:inline-flex; align-items:center; gap:0.5rem; background:var(--cream); border:1px solid var(--soft); padding:0.45rem 0.9rem; border-radius:3px; font-size:0.85rem; color:var(--mid); }
+  .area-tag::before { content:'📍'; font-size:0.78rem; }
+
+  /* MAP - static SVG illustration */
+  .map-wrap { border-radius:10px; overflow:hidden; box-shadow:0 8px 40px rgba(0,0,0,0.1); border:1px solid var(--soft); background:var(--cream); }
+  .map-static { width:100%; display:block; }
+  .map-link-btn { display:block; text-align:center; background:var(--charcoal); color:var(--cream); text-decoration:none; padding:0.85rem; font-size:0.85rem; font-weight:500; letter-spacing:0.03em; transition:background 0.2s; }
+  .map-link-btn:hover { background:var(--accent-dark); }
+
+  /* TERMS */
+  #terms { background:var(--cream); }
+  .terms-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1.8rem; }
+  .term-block { border-left:2px solid var(--accent); padding-left:1.4rem; }
+  .term-block h4 { font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); font-weight:700; margin-bottom:0.5rem; }
+  .term-block p { font-size:0.92rem; color:var(--mid); line-height:1.65; font-weight:300; }
+
+  /* CONTACT */
+  #contact { background:var(--charcoal); }
+  #contact .section-title { color:var(--cream); }
+  #contact .section-sub { color:rgba(245,240,232,0.6); }
+  .contact-form { display:grid; grid-template-columns:1fr 1fr; gap:1.1rem; max-width:680px; }
+  .contact-form .full { grid-column:1/-1; }
+  .form-group { display:flex; flex-direction:column; gap:0.4rem; }
+  .form-group label { font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(245,240,232,0.5); font-weight:500; }
+  .form-group input,.form-group select,.form-group textarea { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); color:var(--cream); padding:0.8rem 1rem; font-family:'DM Sans',sans-serif; font-size:0.92rem; border-radius:4px; outline:none; transition:border-color 0.2s; appearance:none; }
+  .form-group select option { background:var(--charcoal); }
+  .form-group input:focus,.form-group select:focus,.form-group textarea:focus { border-color:var(--accent); }
+  .form-group input::placeholder,.form-group textarea::placeholder { color:rgba(255,255,255,0.22); }
+  .form-group textarea { resize:vertical; min-height:110px; }
+  .btn-submit { background:var(--accent); color:var(--charcoal); border:none; padding:0.95rem 2.3rem; font-family:'DM Sans',sans-serif; font-size:0.88rem; font-weight:700; letter-spacing:0.05em; cursor:pointer; border-radius:4px; transition:background 0.2s,transform 0.2s; margin-top:0.4rem; }
+  .btn-submit:hover { background:#d4b880; transform:translateY(-2px); }
+
+  footer { background:#111110; padding:2.2rem 8%; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; border-top:1px solid rgba(255,255,255,0.06); }
+  footer .logo { color:var(--cream); }
+  footer p { font-size:0.8rem; color:rgba(255,255,255,0.3); }
+
+  .tier-table { width:100%; border-collapse:collapse; margin-top:0.8rem; }
+  .tier-table tr { border-bottom:1px solid var(--soft); }
+  .tier-table tr:last-child { border-bottom:none; }
+  .tier-table td { padding:0.55rem 0.2rem; font-size:0.88rem; }
+  .tier-table td:first-child { color:var(--mid); }
+  .tier-table td:last-child { text-align:right; font-weight:600; color:var(--accent-dark); font-family:'Playfair Display',serif; font-size:1rem; }
+  .tier-table tr.highlight td { color:var(--charcoal); font-weight:600; }
+  .tier-table tr.highlight td:last-child { color:var(--accent-dark); }
+  .faq-list { display:flex; flex-direction:column; gap:0; max-width:780px; }
+  .faq-item { border-bottom:1px solid var(--soft); }
+  .faq-item:first-child { border-top:1px solid var(--soft); }
+  .faq-q { width:100%; background:none; border:none; text-align:left; padding:1.2rem 0; font-family:'DM Sans',sans-serif; font-size:0.97rem; font-weight:600; color:var(--charcoal); cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:1rem; }
+  .faq-q:hover { color:var(--accent-dark); }
+  .faq-chevron { font-size:1.1rem; color:var(--accent); transition:transform 0.3s; flex-shrink:0; }
+  .faq-a { max-height:0; overflow:hidden; transition:max-height 0.35s ease; }
+  .faq-a p { font-size:0.9rem; color:var(--mid); line-height:1.75; padding-bottom:1.2rem; font-weight:300; }
+  .faq-item.open .faq-chevron { transform:rotate(180deg); }
+  .faq-item.open .faq-a { max-height:300px; }
+  .fade-in.visible { opacity:1; transform:translateY(0); }
+
+  @media(max-width:900px){
+    .hero{grid-template-columns:1fr;}
+    .hero-right{min-height:380px;}
+    nav ul{display:none;}
+    .contact-form{grid-template-columns:1fr;}
+    .contact-form .full{grid-column:1;}
+    .perks-strip{gap:1.5rem;}
+    .area-layout{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Rent<span>Goods</span></div>
+  <ul>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#why">Why Rent?</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#area">Service Area</a></li>
+    <li><a href="#terms">Terms</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contact" class="nav-cta">Get Started</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">South East Melbourne to Mornington Peninsula</div>
+    <h1>Laundry Done Right,<br><em>Without the Hassle</em> of Owning</h1>
+    <p>Rent a quality washing machine, dryer, or both — with free local delivery, free installation, and free maintenance included. No big upfront cost, no repair stress.</p>
+    <div class="hero-btns">
+      <a href="#pricing" class="btn-primary">View Pricing</a>
+      <a href="#contact" class="btn-secondary">Enquire Now</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-pattern" style="background-image: radial-gradient(circle at 30% 40%, rgba(200,169,110,0.18) 0%, transparent 60%), radial-gradient(circle at 70% 70%, rgba(158,126,72,0.12) 0%, transparent 55%), linear-gradient(135deg, #F0EAD8 0%, #E8DFC8 50%, #EDE5D0 100%);"></div>
+    <div class="appliance-grid" style="grid-template-columns:1fr 1fr; max-width:360px; gap:1.4rem;">
+      <!-- Washer card -->
+      <div class="appliance-card" style="animation-delay:0s;">
+        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="6" width="64" height="68" rx="6" fill="#E8E2D6" stroke="#C8A96E" stroke-width="2"/>
+          <rect x="14" y="12" width="52" height="10" rx="3" fill="#FDFAF5"/>
+          <circle cx="40" cy="48" r="16" fill="#FDFAF5" stroke="#C8A96E" stroke-width="2"/>
+          <circle cx="40" cy="48" r="10" fill="#E8E2D6" stroke="#9E7E48" stroke-width="1.5"/>
+          <circle cx="40" cy="48" r="4" fill="#C8A96E"/>
+          <circle cx="22" cy="17" r="3" fill="#C8A96E"/>
+          <circle cx="32" cy="17" r="2" fill="#9E7E48"/>
+          <rect x="52" y="14" width="8" height="6" rx="2" fill="#C8A96E"/>
+          <path d="M33 43 Q37 39 41 43 Q45 47 49 43" stroke="#C8A96E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <path d="M34 48 Q38 44 42 48" stroke="#9E7E48" stroke-width="1" fill="none" stroke-linecap="round"/>
+        </svg>
+        <h3>Washer</h3>
+        <div class="price"><span style="font-size:0.65rem;color:var(--mid);font-weight:400;">from </span>$60<span>/month</span></div>
+      </div>
+      <!-- Dryer card -->
+      <div class="appliance-card" style="animation-delay:0.8s;">
+        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="6" width="64" height="68" rx="6" fill="#E8E2D6" stroke="#C8A96E" stroke-width="2"/>
+          <rect x="14" y="12" width="52" height="10" rx="3" fill="#FDFAF5"/>
+          <circle cx="40" cy="48" r="16" fill="#FDFAF5" stroke="#C8A96E" stroke-width="2"/>
+          <circle cx="40" cy="48" r="10" fill="#E8E2D6" stroke="#9E7E48" stroke-width="1.5"/>
+          <path d="M40 40 L40 34" stroke="#C8A96E" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M40 40 L46 44" stroke="#C8A96E" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M40 40 L34 44" stroke="#C8A96E" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="40" cy="40" r="3" fill="#9E7E48"/>
+          <path d="M50 35 Q53 32 50 29" stroke="#C8A96E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <path d="M54 37 Q57 34 54 31" stroke="#9E7E48" stroke-width="1" fill="none" stroke-linecap="round"/>
+          <circle cx="22" cy="17" r="3" fill="#C8A96E"/>
+          <rect x="52" y="14" width="8" height="6" rx="2" fill="#C8A96E"/>
+        </svg>
+        <h3>Dryer</h3>
+        <div class="price"><span style="font-size:0.65rem;color:var(--mid);font-weight:400;">from </span>$50<span>/month</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERKS -->
+<div class="perks-strip">
+  <div class="perk"><div class="perk-icon">🚚</div><div class="perk-text"><strong>Included</strong>Free Local Delivery</div></div>
+  <div class="perk"><div class="perk-icon">🔧</div><div class="perk-text"><strong>Included</strong>Free Installation</div></div>
+  <div class="perk"><div class="perk-icon">🛠️</div><div class="perk-text"><strong>Included</strong>Free Maintenance</div></div>
+  <div class="perk"><div class="perk-icon">👕</div><div class="perk-text"><strong>Laundry</strong>Done at Home</div></div>
+</div>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <div class="section-label">Our Appliances</div>
+  <h2 class="section-title">Simple, Transparent Laundry Pricing</h2>
+  <p class="section-sub">Choose the size that suits your household. All rentals include free local delivery, installation, and ongoing maintenance. No hidden fees, ever.</p>
+  <div class="pricing-grid fade-in">
+
+    <div class="price-card">
+      <div class="price-card-art">
+        <svg viewBox="0 0 110 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="8" width="90" height="114" rx="8" fill="#E8E2D6" stroke="#C8A96E" stroke-width="2.5"/>
+          <rect x="18" y="18" width="74" height="16" rx="4" fill="#FDFAF5"/>
+          <circle cx="55" cy="78" r="26" fill="#FDFAF5" stroke="#C8A96E" stroke-width="2.5"/>
+          <circle cx="55" cy="78" r="16" fill="#E8E2D6" stroke="#9E7E48" stroke-width="2"/>
+          <circle cx="55" cy="78" r="6" fill="#C8A96E"/>
+          <circle cx="28" cy="26" r="4" fill="#C8A96E"/>
+          <circle cx="42" cy="26" r="3" fill="#9E7E48"/>
+          <rect x="70" y="20" width="14" height="10" rx="3" fill="#C8A96E"/>
+          <path d="M44 71 Q50 64 56 71 Q62 78 68 71" stroke="#C8A96E" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M46 79 Q52 72 58 79" stroke="#9E7E48" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="price-card-body">
+        <h3>Washing Machine</h3>
+        <p class="desc">Quality second-hand front loaders, fully serviced and ready to go.</p>
+        <table class="tier-table">
+          <tr><td>5 / 6 kg</td><td>$60 /mo</td></tr>
+          <tr><td>7 kg</td><td>$70 /mo</td></tr>
+          <tr><td>8 kg</td><td>$80 /mo</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="price-card">
+      <div class="price-card-art">
+        <svg viewBox="0 0 110 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="8" width="90" height="114" rx="8" fill="#E8E2D6" stroke="#C8A96E" stroke-width="2.5"/>
+          <rect x="18" y="18" width="74" height="16" rx="4" fill="#FDFAF5"/>
+          <circle cx="55" cy="78" r="26" fill="#FDFAF5" stroke="#C8A96E" stroke-width="2.5"/>
+          <circle cx="55" cy="78" r="16" fill="#E8E2D6" stroke="#9E7E48" stroke-width="2"/>
+          <path d="M55 64 L55 55" stroke="#C8A96E" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M55 64 L64 70" stroke="#C8A96E" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M55 64 L46 70" stroke="#C8A96E" stroke-width="3.5" stroke-linecap="round"/>
+          <circle cx="55" cy="64" r="4.5" fill="#9E7E48"/>
+          <path d="M72 55 Q77 49 72 43" stroke="#C8A96E" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M78 58 Q83 52 78 46" stroke="#9E7E48" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <circle cx="28" cy="26" r="4" fill="#C8A96E"/>
+          <rect x="70" y="20" width="14" height="10" rx="3" fill="#C8A96E"/>
+        </svg>
+      </div>
+      <div class="price-card-body">
+        <h3>Vented Dryer</h3>
+        <p class="desc">Reliable vented tumble dryers, maintained and in great working order.</p>
+        <table class="tier-table">
+          <tr><td>4 kg</td><td>$50 /mo</td></tr>
+          <tr><td>5 kg</td><td>$60 /mo</td></tr>
+          <tr><td>6 / 7 kg</td><td>$70 /mo</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="price-card featured">
+      <div class="featured-badge">Best Value</div>
+      <div class="price-card-art duo" style="display:flex;">
+        <svg viewBox="0 0 110 130" fill="none" style="width:52px;height:62px;">
+          <rect x="10" y="8" width="90" height="114" rx="8" fill="#E8E2D6" stroke="#C8A96E" stroke-width="2.5"/>
+          <circle cx="55" cy="78" r="26" fill="#FDFAF5" stroke="#C8A96E" stroke-width="2.5"/>
+          <circle cx="55" cy="78" r="10" fill="#E8E2D6" stroke="#9E7E48" stroke-width="2"/>
+          <circle cx="55" cy="78" r="4" fill="#C8A96E"/>
+        </svg>
+        <svg viewBox="0 0 110 130" fill="none" style="width:52px;height:62px;">
+          <rect x="10" y="8" width="90" height="114" rx="8" fill="#E8E2D6" stroke="#C8A96E" stroke-width="2.5"/>
+          <circle cx="55" cy="78" r="26" fill="#FDFAF5" stroke="#C8A96E" stroke-width="2.5"/>
+          <path d="M55 64 L55 55" stroke="#C8A96E" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M55 64 L64 70" stroke="#C8A96E" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M55 64 L46 70" stroke="#C8A96E" stroke-width="3.5" stroke-linecap="round"/>
+          <circle cx="55" cy="64" r="4" fill="#9E7E48"/>
+        </svg>
+      </div>
+      <div class="price-card-body">
+        <h3>Combo Special</h3>
+        <p class="desc">5/6kg washer + 4kg vented dryer. Save $10/mo vs renting separately. Perfect complete laundry setup.</p>
+        <div class="big-price"><sup>$</sup>100<sub>/mo</sub></div>
+        <p style="font-size:0.78rem;color:var(--mid);margin-top:0.5rem;">Was $110 — save $10 every month</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHY RENT? -->
+<section class="section" id="why">
+  <div class="section-label" style="color:var(--accent)">The Smart Choice</div>
+  <h2 class="section-title">Why Rent Instead of Buy?</h2>
+  <p class="section-sub">The maths might surprise you. Here's how renting stacks up against the alternatives — using real local numbers.</p>
+  <div class="why-grid fade-in">
+
+    <div class="why-card">
+      <div class="why-card-header"><div class="why-icon">🏷️</div><h3>vs. Buying Second-Hand</h3></div>
+      <p>A used washing machine in Melbourne typically lists for $200–$300 on Gumtree — but that's just the start. Add delivery and installation and you're already looking at $400+ before the machine has even done a single load.</p>
+      <div class="vs-table">
+        <div class="vs-divider">Buying second-hand (upfront costs)</div>
+        <div class="vs-row"><span class="vs-label">Used washer (Gumtree)</span><span class="vs-bad">~$200–$300</span></div>
+        <div class="vs-row"><span class="vs-label">Delivery (man with van)</span><span class="vs-bad">~$80–$120</span></div>
+        <div class="vs-row"><span class="vs-label">Installation/plumber</span><span class="vs-bad">~$80–$150</span></div>
+        <div class="vs-row" style="border-top:1px solid rgba(255,255,255,0.1);margin-top:0.3rem;padding-top:0.3rem"><span class="vs-label" style="color:rgba(245,240,232,0.8)">Total upfront</span><span class="vs-bad">$360–$570+</span></div>
+        <div class="vs-divider" style="margin-top:0.8rem">Ongoing costs (per year avg)</div>
+        <div class="vs-row"><span class="vs-label">Repair callout + parts</span><span class="vs-bad">~$150–$400</span></div>
+        <div class="vs-row"><span class="vs-label">Replacement when it dies</span><span class="vs-bad">Start again</span></div>
+        <div class="vs-divider" style="margin-top:0.8rem">Renting with us</div>
+        <div class="vs-row"><span class="vs-label">First + last month upfront</span><span class="vs-good">$120</span></div>
+        <div class="vs-row"><span class="vs-label">All repairs & maintenance</span><span class="vs-good">$0 — included</span></div>
+      </div>
+    </div>
+
+    <div class="why-card">
+      <div class="why-card-header"><div class="why-icon">🪙</div><h3>vs. The Laundromat</h3></div>
+      <p>Melbourne laundromats in 2026 charge $6–$8 per wash and $4–$6 to dry. At just 4 washes a week, that's $200–$280 per month — and you still have to drive there, wait, and carry it all home.</p>
+      <div class="vs-table">
+        <div class="vs-divider">Laundromat (4 washes/week, Melbourne 2026)</div>
+        <div class="vs-row"><span class="vs-label">Wash $6–$8 × 16/mo</span><span class="vs-bad">~$96–$128</span></div>
+        <div class="vs-row"><span class="vs-label">Dry $4–$6 × 16/mo</span><span class="vs-bad">~$64–$96</span></div>
+        <div class="vs-row"><span class="vs-label">Fuel, time & effort</span><span class="vs-bad">Extra</span></div>
+        <div class="vs-row" style="border-top:1px solid rgba(255,255,255,0.1);margin-top:0.3rem;padding-top:0.3rem"><span class="vs-label" style="color:rgba(245,240,232,0.8)">Total/month</span><span class="vs-bad">$160–$224+</span></div>
+        <div class="vs-divider" style="margin-top:0.8rem">Combo rental (washer + dryer)</div>
+        <div class="vs-row"><span class="vs-label">Monthly rental</span><span class="vs-good">$100/mo</span></div>
+        <div class="vs-row"><span class="vs-label">Wash at home (elec + water)</span><span class="vs-good">~$1–2/load</span></div>
+      </div>
+    </div>
+
+    <div class="why-card">
+      <div class="why-card-header"><div class="why-icon">🚚</div><h3>No Headache When You Move</h3></div>
+      <p>Whitegoods are heavy and a nightmare to move. When you rent, the appliance stays behind — we collect it free. You pack lighter and skip the removalist surcharge.</p>
+      <div class="vs-table">
+        <div class="vs-divider">Moving with owned appliances</div>
+        <div class="vs-row"><span class="vs-label">Removalist uplift per item</span><span class="vs-bad">~$80–$150</span></div>
+        <div class="vs-row"><span class="vs-label">Damage in transit</span><span class="vs-bad">Your risk</span></div>
+        <div class="vs-row"><span class="vs-label">Selling it yourself</span><span class="vs-bad">Time & effort</span></div>
+        <div class="vs-divider" style="margin-top:0.8rem">Renting with us</div>
+        <div class="vs-row"><span class="vs-label">Give 1 month's notice</span><span class="vs-good">Done</span></div>
+        <div class="vs-row"><span class="vs-label">We collect it</span><span class="vs-good">Free</span></div>
+      </div>
+    </div>
+
+    <div class="why-card">
+      <div class="why-card-header"><div class="why-icon">📅</div><h3>Flexibility for Renters</h3></div>
+      <p>Between leases? New to the area? Just moved into an unfurnished place? Buying appliances you might only need for 12 months rarely makes financial sense.</p>
+      <div class="vs-table">
+        <div class="vs-divider">Common renter situations</div>
+        <div class="vs-row"><span class="vs-label">New to Mornington area</span><span class="vs-good">Sorted same week</span></div>
+        <div class="vs-row"><span class="vs-label">12-month lease</span><span class="vs-good">6-month min fits</span></div>
+        <div class="vs-row"><span class="vs-label">Unfurnished rental</span><span class="vs-good">We fill the gap</span></div>
+        <div class="vs-row"><span class="vs-label">Can't afford $500+ upfront</span><span class="vs-good">Just $120 upfront</span></div>
+      </div>
+    </div>
+
+    <div class="why-card">
+      <div class="why-card-header"><div class="why-icon">🛠️</div><h3>Zero Repair Stress</h3></div>
+      <p>Second-hand appliances break. A repair callout in SE Melbourne typically costs $100–$180 just to diagnose — then more for parts. With a rental, all of that is on us.</p>
+      <div class="vs-table">
+        <div class="vs-divider">Owning a used appliance</div>
+        <div class="vs-row"><span class="vs-label">Repair callout fee</span><span class="vs-bad">~$100–$180</span></div>
+        <div class="vs-row"><span class="vs-label">Parts & labour</span><span class="vs-bad">~$80–$300 extra</span></div>
+        <div class="vs-row"><span class="vs-label">Days without a machine</span><span class="vs-bad">Your problem</span></div>
+        <div class="vs-divider" style="margin-top:0.8rem">Renting with us</div>
+        <div class="vs-row"><span class="vs-label">Call us when it breaks</span><span class="vs-good">We fix it</span></div>
+        <div class="vs-row"><span class="vs-label">Cost to you</span><span class="vs-good">$0</span></div>
+      </div>
+    </div>
+
+    <div class="why-card">
+      <div class="why-card-header"><div class="why-icon">💸</div><h3>Better Cash Flow When Moving</h3></div>
+      <p>Moving in Melbourne is eye-wateringly expensive. By the time you've covered bond, removalists, and first month's rent — dropping $400+ on a washer and dryer on top of that really stings.</p>
+      <div class="vs-table">
+        <div class="vs-divider">Typical Melbourne moving costs (2026)</div>
+        <div class="vs-row"><span class="vs-label">Bond (4 weeks rent)</span><span class="vs-bad">~$1,600–$2,400</span></div>
+        <div class="vs-row"><span class="vs-label">Removalists (2-man, 3–5hrs)</span><span class="vs-bad">~$400–$900</span></div>
+        <div class="vs-row"><span class="vs-label">Truck/van hire (DIY)</span><span class="vs-bad">~$180–$220/day</span></div>
+        <div class="vs-row"><span class="vs-label">Buying washer + dryer s/h</span><span class="vs-bad">~$350–$500</span></div>
+        <div class="vs-divider" style="margin-top:0.8rem">Rent laundry instead of buying</div>
+        <div class="vs-row"><span class="vs-label">Upfront rental cost</span><span class="vs-good">$200 total</span></div>
+        <div class="vs-row"><span class="vs-label">Cash saved on moving day</span><span class="vs-good">$150–$300</span></div>
+      </div>
+    </div>
+
+  </div>
+  <p class="disclaimer">* Comparisons based on Gumtree & Facebook Marketplace Melbourne listings, Melbourne laundromat pricing (Mornington Coin Laundrette, Swanston St Coin Laundry; wash $6–$8, dry $4–$6 per load, 2026), SE Melbourne repair callout benchmarks, and removalist pricing data (Holloway Removals, WhatsDamage.com.au, April 2026). All figures approximate and for illustrative purposes.</p>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="how" style="background:var(--cream)">
+  <div class="section-label">The Process</div>
+  <h2 class="section-title">How It Works</h2>
+  <p class="section-sub">Getting started is simple. We handle the heavy lifting — literally.</p>
+  <div class="steps fade-in">
+    <div class="step"><div class="step-num">01</div><h3>Choose Your Appliance</h3><p>Browse our range and pick what suits your home and budget. Mix and match for savings.</p></div>
+    <div class="step"><div class="step-num">02</div><h3>We Deliver & Install</h3><p>We'll deliver to your door and install everything — completely free. No tradespeople needed.</p></div>
+    <div class="step"><div class="step-num">03</div><h3>Pay First & Last Month</h3><p>Two months' rent is collected on delivery — covering your <strong>first and last months</strong>. Then pay monthly.</p></div>
+    <div class="step"><div class="step-num">04</div><h3>We Handle All Repairs</h3><p>If anything breaks, we fix it — no questions, no extra charges, ever.</p></div>
+    <div class="step"><div class="step-num">05</div><h3>End Anytime After 6 Months</h3><p>After your minimum 6-month term, give 1 month's notice and we'll collect free of charge.</p></div>
+  </div>
+</section>
+
+<!-- SERVICE AREA -->
+<section class="section" id="area">
+  <div class="section-label">Where We Deliver</div>
+  <h2 class="section-title">SE Melbourne &amp; Mornington Peninsula</h2>
+  <p class="section-sub">Free local delivery and collection across South-East Melbourne and the full Mornington Peninsula. Not sure if we cover you? Just ask.</p>
+  <div class="area-layout fade-in">
+    <div>
+      <p style="font-size:0.88rem;color:var(--mid);line-height:1.7;margin-bottom:1rem;">We service a wide corridor from the south-east suburbs of Melbourne all the way down to the tip of the Peninsula.</p>
+      <div class="area-list">
+        <span class="area-tag">Frankston & surrounds</span>
+        <span class="area-tag">Mornington</span>
+        <span class="area-tag">Mount Eliza & Mount Martha</span>
+        <span class="area-tag">Rosebud & Rye</span>
+        <span class="area-tag">Sorrento & Portsea</span>
+        <span class="area-tag">Dromana & Safety Beach</span>
+        <span class="area-tag">Cranbourne & Berwick</span>
+        <span class="area-tag">Dandenong & Endeavour Hills</span>
+        <span class="area-tag">Pakenham & Officer</span>
+        <span class="area-tag">+ surrounding suburbs</span>
+      </div>
+    </div>
+    <div class="map-wrap">
+      <!-- Inline SVG map illustration of SE Melbourne → Mornington Peninsula -->
+      <svg class="map-static" viewBox="0 0 500 420" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;">
+        <!-- Background -->
+        <rect width="500" height="420" fill="#e8f0e8"/>
+        <!-- Port Phillip Bay -->
+        <path d="M160,80 L200,120 L220,200 L210,280 L180,340 L140,380 L80,400 L40,380 L20,320 L30,240 L60,160 L100,100 Z" fill="#b8d4e8" opacity="0.7"/>
+        <!-- Mornington Peninsula shape -->
+        <path d="M200,120 L280,100 L360,120 L400,160 L420,220 L400,290 L360,340 L300,370 L240,360 L200,320 L190,260 L200,200 L210,160 Z" fill="#d4e8c8" stroke="#a0c090" stroke-width="1.5"/>
+        <!-- SE Melbourne land -->
+        <path d="M160,80 L500,80 L500,200 L420,220 L400,160 L360,120 L280,100 L200,120 L200,80Z" fill="#ddeedd" stroke="#aaccaa" stroke-width="1"/>
+        <!-- Bay label -->
+        <text x="80" y="250" fill="#5588aa" font-size="13" font-family="sans-serif" font-style="italic" opacity="0.8">Port Phillip</text>
+        <text x="88" y="268" fill="#5588aa" font-size="13" font-family="sans-serif" font-style="italic" opacity="0.8">Bay</text>
+
+        <!-- Roads / key lines -->
+        <line x1="200" y1="100" x2="200" y2="360" stroke="#ffffff" stroke-width="2.5" stroke-dasharray="8,4" opacity="0.6"/>
+        <!-- Frankston -->
+        <circle cx="210" cy="165" r="8" fill="#C8A96E" stroke="white" stroke-width="2"/>
+        <text x="224" y="162" fill="#1C1C1A" font-size="11" font-weight="bold" font-family="sans-serif">Frankston</text>
+        <!-- Dandenong -->
+        <circle cx="270" cy="130" r="6" fill="#9E7E48" stroke="white" stroke-width="2"/>
+        <text x="280" y="134" fill="#1C1C1A" font-size="10" font-family="sans-serif">Dandenong</text>
+        <!-- Cranbourne -->
+        <circle cx="300" cy="155" r="6" fill="#9E7E48" stroke="white" stroke-width="2"/>
+        <text x="312" y="159" fill="#1C1C1A" font-size="10" font-family="sans-serif">Cranbourne</text>
+        <!-- Mornington -->
+        <circle cx="232" cy="225" r="7" fill="#C8A96E" stroke="white" stroke-width="2"/>
+        <text x="244" y="229" fill="#1C1C1A" font-size="11" font-weight="bold" font-family="sans-serif">Mornington</text>
+        <!-- Rosebud -->
+        <circle cx="225" cy="285" r="6" fill="#C8A96E" stroke="white" stroke-width="2"/>
+        <text x="237" y="289" fill="#1C1C1A" font-size="10" font-family="sans-serif">Rosebud</text>
+        <!-- Sorrento -->
+        <circle cx="208" cy="335" r="6" fill="#C8A96E" stroke="white" stroke-width="2"/>
+        <text x="220" y="339" fill="#1C1C1A" font-size="10" font-family="sans-serif">Sorrento</text>
+        <!-- Portsea -->
+        <circle cx="195" cy="360" r="5" fill="#9E7E48" stroke="white" stroke-width="1.5"/>
+        <text x="205" y="364" fill="#1C1C1A" font-size="9" font-family="sans-serif">Portsea</text>
+        <!-- Pakenham -->
+        <circle cx="370" cy="155" r="6" fill="#9E7E48" stroke="white" stroke-width="2"/>
+        <text x="380" y="159" fill="#1C1C1A" font-size="10" font-family="sans-serif">Pakenham</text>
+        <!-- Mount Eliza -->
+        <circle cx="222" cy="255" r="5" fill="#9E7E48" stroke="white" stroke-width="1.5"/>
+        <text x="232" y="259" fill="#1C1C1A" font-size="9" font-family="sans-serif">Mt Eliza</text>
+        <!-- Melbourne CBD reference -->
+        <rect x="130" y="82" width="52" height="20" rx="4" fill="rgba(255,255,255,0.6)"/>
+        <text x="135" y="96" fill="#4A4A45" font-size="10" font-family="sans-serif">← Melbourne CBD</text>
+
+        <!-- Service area boundary (dashed) -->
+        <path d="M240,95 L420,110 L440,200 L410,300 L350,370 L250,375 L190,360 L185,270 L190,180 L200,130 Z" fill="none" stroke="#C8A96E" stroke-width="2" stroke-dasharray="10,5" opacity="0.7"/>
+
+        <!-- Legend -->
+        <rect x="320" y="270" width="165" height="90" rx="6" fill="white" opacity="0.88"/>
+        <text x="332" y="290" fill="#1C1C1A" font-size="11" font-weight="bold" font-family="sans-serif">Service Area</text>
+        <circle cx="333" cy="308" r="5" fill="#C8A96E"/>
+        <text x="343" y="312" fill="#4A4A45" font-size="10" font-family="sans-serif">Major hubs</text>
+        <circle cx="333" cy="326" r="4" fill="#9E7E48"/>
+        <text x="343" y="330" fill="#4A4A45" font-size="10" font-family="sans-serif">Other suburbs</text>
+        <line x1="328" y1="344" x2="345" y2="344" stroke="#C8A96E" stroke-width="2" stroke-dasharray="5,3"/>
+        <text x="350" y="348" fill="#4A4A45" font-size="10" font-family="sans-serif">Coverage zone</text>
+      </svg>
+      <a class="map-link-btn" href="https://maps.google.com/?q=Frankston,VIC,Australia" target="_blank" rel="noopener">
+        📍 Open in Google Maps →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- TERMS -->
+<section class="section" id="terms" style="background:var(--cream)">
+  <div class="section-label">Rental Terms</div>
+  <h2 class="section-title">Straightforward Conditions</h2>
+  <p class="section-sub">No small print surprises. Here's everything you need to know upfront.</p>
+  <div class="terms-grid fade-in">
+    <div class="term-block"><h4>Minimum Term</h4><p>All rentals have a minimum period of <strong>6 months</strong>. After that, the rental continues month to month.</p></div>
+    <div class="term-block"><h4>Payment on Delivery</h4><p>On delivery, <strong>2 months' rent is collected</strong> — covering your <strong>first and last months</strong>. No bond, no hidden fees.</p></div>
+    <div class="term-block"><h4>Notice to Collect</h4><p>When you're done, give us <strong>1 month's written notice</strong> and we'll arrange free collection at a time that suits you.</p></div>
+    <div class="term-block"><h4>Delivery & Installation</h4><p>We provide <strong>free local delivery and installation</strong> for all appliances across our service area.</p></div>
+    <div class="term-block"><h4>Maintenance & Repairs</h4><p><strong>All maintenance and repairs are included</strong> throughout your rental — we'll get you back up and running fast.</p></div>
+    <div class="term-block"><h4>Second Hand Quality</h4><p>All washers and dryers are <strong>quality-checked second-hand</strong> goods — cleaned, serviced, and tested before delivery.</p></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq" style="background:var(--warm-white);">
+  <div class="section-label">Got Questions?</div>
+  <h2 class="section-title">Frequently Asked Questions</h2>
+  <p class="section-sub">Everything you need to know before you rent.</p>
+  <div class="faq-list fade-in">
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Do I need a plumber to install a washing machine? <span class="faq-chevron">▼</span></button>
+      <div class="faq-a"><p>No. We handle the full installation ourselves — no plumber needed. Our team connects your washer to the existing water supply and drainage, and tests everything before we leave. It's all included in your rental at no extra cost.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">What happens if the appliance breaks down? <span class="faq-chevron">▼</span></button>
+      <div class="faq-a"><p>Just call us. All maintenance and repairs are fully included in your rental — parts, labour, and callout. We'll get it sorted as quickly as possible. There are no extra charges, ever.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Can I end the rental early? <span class="faq-chevron">▼</span></button>
+      <div class="faq-a"><p>All rentals have a minimum 6-month term. After that, they continue month to month and you can give us 1 month's written notice at any time to arrange free collection. The final month is already covered by the payment made on delivery.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Do you service my suburb? <span class="faq-chevron">▼</span></button>
+      <div class="faq-a"><p>We cover South East Melbourne through to the tip of the Mornington Peninsula — including Frankston, Mornington, Mount Eliza, Rosebud, Sorrento, Cranbourne, Dandenong, Pakenham, and surrounding areas. Not sure? Drop us a message and we'll confirm quickly.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">How much do I pay upfront? <span class="faq-chevron">▼</span></button>
+      <div class="faq-a"><p>Two months' rent is collected on delivery — this covers your first and last months. There's no bond and no hidden fees. After that, you pay monthly. For the combo deal at $100/mo, that's just $200 upfront for a full laundry setup delivered and installed.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Are the appliances clean and in good working order? <span class="faq-chevron">▼</span></button>
+      <div class="faq-a"><p>Yes. All our appliances are quality second-hand units that are thoroughly cleaned, serviced, and tested before every delivery. If we wouldn't be comfortable putting it in our own home, it doesn't go out.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">What sizes do you have available? <span class="faq-chevron">▼</span></button>
+      <div class="faq-a"><p>For washing machines we have 5/6kg, 7kg, and 8kg options starting from $60/mo. For vented dryers, we have 4kg, 5kg, and 6/7kg options starting from $50/mo. Availability varies — contact us and we'll let you know what's in stock near you.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">What if I move house during my rental? <span class="faq-chevron">▼</span></button>
+      <div class="faq-a"><p>If you're moving within our service area, just let us know and we'll arrange to relocate the appliance to your new address. Moving out of the area, or want to end the rental? Give us 1 month's notice and we'll collect it free of charge.</p></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="section-label">Get In Touch</div>
+  <h2 class="section-title">Ready to Get Started?</h2>
+  <p class="section-sub">Fill in the form and we'll get back to you shortly to arrange delivery.</p>
+  <form class="contact-form fade-in" onsubmit="handleSubmit(event)">
+    <div class="form-group"><label>First Name</label><input type="text" placeholder="Jane" required></div>
+    <div class="form-group"><label>Last Name</label><input type="text" placeholder="Smith" required></div>
+    <div class="form-group"><label>Email Address</label><input type="email" placeholder="jane@example.com" required></div>
+    <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="04xx xxx xxx"></div>
+    <div class="form-group">
+      <label>Appliance Interested In</label>
+      <select required>
+        <option value="" disabled selected>Select appliance…</option>
+        <option>Washing Machine — $60/mo</option>
+        <option>Dryer — $50/mo</option>
+        <option>Washer + Dryer Combo — $100/mo</option>
+        <option>Multiple appliances</option>
+      </select>
+    </div>
+    <div class="form-group"><label>Suburb</label><input type="text" placeholder="e.g. Frankston"></div>
+    <div class="form-group full"><label>Additional Notes</label><textarea placeholder="Any access requirements, specific dates, or questions…"></textarea></div>
+    <div class="form-group full"><button type="submit" class="btn-submit">Send Enquiry →</button></div>
+  </form>
+</section>
+
+<footer>
+  <div class="logo">Rent<span>Goods</span></div>
+  <p>© 2025 RentGoods.com.au — SE Melbourne & Mornington Peninsula</p>
+  <p>Free delivery · Free installation · Free maintenance</p>
+</footer>
+
+<script>
+  function toggleFaq(btn) {
+    const item = btn.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.btn-submit');
+    btn.textContent = '✓ Enquiry Sent!';
+    btn.style.background = '#5a8a5a';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = 'Send Enquiry →';
+      btn.style.background = '';
+      btn.disabled = false;
+      e.target.reset();
+    }, 3000);
+  }
+</script>
+</body>
+</html>
