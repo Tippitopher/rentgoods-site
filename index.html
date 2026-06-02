@@ -658,16 +658,26 @@
 
   function handleSubmit(e) {
     e.preventDefault();
-    const btn = e.target.querySelector('.btn-submit');
-    btn.textContent = '✓ Enquiry Sent!';
-    btn.style.background = '#5a8a5a';
-    btn.disabled = true;
-    setTimeout(() => {
-      btn.textContent = 'Send Enquiry →';
-      btn.style.background = '';
-      btn.disabled = false;
-      e.target.reset();
-    }, 3000);
+    const f = e.target;
+    const firstName = f.querySelector('input[placeholder="Jane"]').value;
+    const lastName  = f.querySelector('input[placeholder="Smith"]').value;
+    const email     = f.querySelector('input[type="email"]').value;
+    const phone     = f.querySelector('input[type="tel"]').value;
+    const appliance = f.querySelector('select').value;
+    const suburb    = f.querySelector('input[placeholder="e.g. Frankston"]').value;
+    const notes     = f.querySelector('textarea').value;
+
+    const subject = encodeURIComponent(`RentGoods Enquiry — ${firstName} ${lastName}`);
+    const body = encodeURIComponent(
+      `Name: ${firstName} ${lastName}\n` +
+      `Email: ${email}\n` +
+      `Phone: ${phone || 'Not provided'}\n` +
+      `Appliance: ${appliance}\n` +
+      `Suburb: ${suburb || 'Not provided'}\n` +
+      `\nNotes:\n${notes || 'None'}`
+    );
+
+    window.location.href = `mailto:hello@rentgoods.com.au?subject=${subject}&body=${body}`;
   }
 </script>
 </body>
