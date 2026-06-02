@@ -617,13 +617,13 @@
   <h2 class="section-title">Ready to Get Started?</h2>
   <p class="section-sub">Fill in the form and we'll get back to you shortly to arrange delivery.</p>
   <form class="contact-form fade-in" onsubmit="handleSubmit(event)">
-    <div class="form-group"><label>First Name</label><input type="text" placeholder="Jane" required></div>
-    <div class="form-group"><label>Last Name</label><input type="text" placeholder="Smith" required></div>
-    <div class="form-group"><label>Email Address</label><input type="email" placeholder="jane@example.com" required></div>
-    <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="04xx xxx xxx"></div>
+    <div class="form-group"><label>First Name</label><input name="firstName" type="text" placeholder="Jane" required></div>
+    <div class="form-group"><label>Last Name</label><input name="lastName" type="text" placeholder="Smith" required></div>
+    <div class="form-group"><label>Email Address</label><input name="email" type="email" placeholder="jane@example.com" required></div>
+    <div class="form-group"><label>Phone Number</label><input name="phone" type="tel" placeholder="04xx xxx xxx"></div>
     <div class="form-group">
       <label>Appliance Interested In</label>
-      <select required>
+      <select name="appliance" required>
         <option value="" disabled selected>Select appliance…</option>
         <option>Washing Machine — $60/mo</option>
         <option>Dryer — $50/mo</option>
@@ -631,16 +631,17 @@
         <option>Multiple appliances</option>
       </select>
     </div>
-    <div class="form-group"><label>Suburb</label><input type="text" placeholder="e.g. Frankston"></div>
-    <div class="form-group full"><label>Additional Notes</label><textarea placeholder="Any access requirements, specific dates, or questions…"></textarea></div>
+    <div class="form-group"><label>Suburb</label><input name="suburb" type="text" placeholder="e.g. Frankston"></div>
+    <div class="form-group full"><label>Additional Notes</label><textarea name="notes" placeholder="Any access requirements, specific dates, or questions…"></textarea></div>
     <div class="form-group full"><button type="submit" class="btn-submit">Send Enquiry →</button></div>
   </form>
 </section>
 
 <footer>
   <div class="logo">Rent<span>Goods</span></div>
-  <p>© 2025 RentGoods.com.au — SE Melbourne & Mornington Peninsula</p>
+  <p>© 2026 RentGoods.com.au — SE Melbourne & Mornington Peninsula</p>
   <p>Free delivery · Free installation · Free maintenance</p>
+  <p style="margin-top:0.6rem;"><a href="mailto:hello@rentgoods.com.au" style="color:var(--accent);text-decoration:none;font-weight:500;">hello@rentgoods.com.au</a></p>
 </footer>
 
 <script>
@@ -659,13 +660,13 @@
   function handleSubmit(e) {
     e.preventDefault();
     const f = e.target;
-    const firstName = f.querySelector('input[placeholder="Jane"]').value;
-    const lastName  = f.querySelector('input[placeholder="Smith"]').value;
-    const email     = f.querySelector('input[type="email"]').value;
-    const phone     = f.querySelector('input[type="tel"]').value;
-    const appliance = f.querySelector('select').value;
-    const suburb    = f.querySelector('input[placeholder="e.g. Frankston"]').value;
-    const notes     = f.querySelector('textarea').value;
+    const firstName = f.firstName.value.trim();
+    const lastName  = f.lastName.value.trim();
+    const email     = f.email.value.trim();
+    const phone     = f.phone.value.trim();
+    const appliance = f.appliance.value;
+    const suburb    = f.suburb.value.trim();
+    const notes     = f.notes.value.trim();
 
     const subject = encodeURIComponent(`RentGoods Enquiry — ${firstName} ${lastName}`);
     const body = encodeURIComponent(
