@@ -372,6 +372,47 @@ footer{background:#0e0e0e}.fade-in{opacity:0;transform:translateY(20px);transiti
 }
 </style>
 
+
+<style>
+@media (max-width: 700px) {
+  .perks-strip {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 0 !important;
+    padding: 0 !important;
+    align-items: stretch !important;
+  }
+  .perk {
+    min-width: 0 !important;
+    padding: 22px 14px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 10px !important;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+  .perk:nth-child(odd) {
+    border-right: 1px solid rgba(255,255,255,.08);
+  }
+  .perk-icon {
+    width: 34px !important;
+    flex: 0 0 34px !important;
+    text-align: center !important;
+    font-size: 1.45rem !important;
+  }
+  .perk-text {
+    min-width: 0 !important;
+    font-size: .91rem !important;
+    line-height: 1.28 !important;
+  }
+  .perk-text strong {
+    margin-bottom: 3px !important;
+    font-size: .66rem !important;
+    letter-spacing: .08em !important;
+  }
+}
+</style>
+
 </head>
 <body>
 
