@@ -291,6 +291,87 @@ footer{background:#0e0e0e}.fade-in{opacity:0;transform:translateY(20px);transiti
 }
 </script>
 
+
+<style>
+/* Mobile polish */
+@media (max-width: 700px) {
+  nav { height: 72px; padding: 0 22px; }
+  .logo { font-size: 1.35rem; }
+
+  .hero {
+    min-height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    padding-top: 72px !important;
+  }
+  .hero-left {
+    padding: 42px 22px 28px !important;
+    width: 100% !important;
+  }
+  .hero h1 {
+    font-size: clamp(3rem, 14vw, 4.6rem) !important;
+    line-height: .91 !important;
+    letter-spacing: -.065em !important;
+    margin-bottom: 24px !important;
+  }
+  .hero p {
+    font-size: 1.08rem !important;
+    line-height: 1.55 !important;
+    max-width: none !important;
+    margin-bottom: 26px !important;
+  }
+  .hero-right {
+    min-height: 300px !important;
+    width: 100% !important;
+    padding: 24px 18px 36px !important;
+  }
+  .appliance-grid {
+    width: 100% !important;
+    max-width: 390px !important;
+    padding: 0 !important;
+    gap: 12px !important;
+  }
+  .appliance-card { padding: 18px 8px !important; }
+  .hero-btns { width: 100%; }
+  .hero-btns a { width: 100%; text-align: center; }
+
+  #area .area-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 28px !important;
+  }
+  #area .area-layout > div:first-child { width: 100% !important; }
+  #area .map-wrap {
+    width: 100% !important;
+    max-width: 560px !important;
+    margin: 0 auto !important;
+    order: 2;
+  }
+  #area .map-static {
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+  }
+  #area .area-list {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 9px !important;
+    margin-top: 20px !important;
+  }
+  #area .area-tag {
+    width: 100% !important;
+    padding: 12px 15px !important;
+    border-radius: 12px !important;
+    font-size: .95rem !important;
+  }
+  .map-link-btn {
+    padding: 15px 12px !important;
+    font-size: .95rem !important;
+  }
+  .section { padding-left: 22px !important; padding-right: 22px !important; }
+}
+</style>
+
 </head>
 <body>
 
@@ -580,16 +661,17 @@ footer{background:#0e0e0e}.fade-in{opacity:0;transform:translateY(20px);transiti
     <div>
       <p style="font-size:0.88rem;color:var(--mid);line-height:1.7;margin-bottom:1rem;">We service a wide corridor from the south-east suburbs of Melbourne all the way down to the tip of the Peninsula.</p>
       <div class="area-list">
-        <span class="area-tag">Frankston & surrounds</span>
-        <span class="area-tag">Mornington</span>
-        <span class="area-tag">Mount Eliza & Mount Martha</span>
-        <span class="area-tag">Rosebud & Rye</span>
-        <span class="area-tag">Sorrento & Portsea</span>
-        <span class="area-tag">Dromana & Safety Beach</span>
-        <span class="area-tag">Cranbourne & Berwick</span>
-        <span class="area-tag">Dandenong & Endeavour Hills</span>
-        <span class="area-tag">Pakenham & Officer</span>
-        <span class="area-tag">+ surrounding suburbs</span>
+        <span class="area-tag">Dandenong &amp; Endeavour Hills</span>
+        <span class="area-tag">Berwick &amp; surrounding suburbs</span>
+        <span class="area-tag">Pakenham &amp; Officer</span>
+        <span class="area-tag">Cranbourne &amp; surrounds</span>
+        <span class="area-tag">Bayside &amp; southern suburbs</span>
+        <span class="area-tag">Frankston &amp; surrounds</span>
+        <span class="area-tag">Mount Eliza</span>
+        <span class="area-tag">Mornington &amp; Mount Martha</span>
+        <span class="area-tag">Dromana &amp; Safety Beach</span>
+        <span class="area-tag">Rosebud &amp; Rye</span>
+        <span class="area-tag">Sorrento &amp; Portsea</span>
       </div>
     </div>
     <div class="map-wrap">
@@ -637,8 +719,8 @@ footer{background:#0e0e0e}.fade-in{opacity:0;transform:translateY(20px);transiti
         <!-- legend -->
         <g filter="url(#shadow)"><rect x="426" y="382" width="164" height="88" rx="14" fill="#fff"/><circle cx="449" cy="410" r="7" fill="#e52f25"/><text x="465" y="414" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#333">Main service hubs</text><line x1="442" y1="439" x2="458" y2="439" stroke="#e52f25" stroke-width="3" stroke-dasharray="6 4"/><text x="465" y="443" font-family="Arial,sans-serif" font-size="11" fill="#555">Approx. coverage</text></g>
       </svg>
-      <a class="map-link-btn" href="https://www.google.com/maps/search/?api=1&query=Mornington+Peninsula+Victoria" target="_blank" rel="noopener">
-        📍 Open in Google Maps →
+      <a class="map-link-btn" href="https://www.google.com/maps/search/?api=1&query=Bayside+Victoria+Australia" target="_blank" rel="noopener">
+        📍 View Bayside in Google Maps →
       </a>
     </div>
   </div>
